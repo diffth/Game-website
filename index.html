@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quest: 인공지능 탐험기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Start Screen -->
+        <section id="start-screen" class="screen active">
+            <div class="glass-panel">
+                <h1 class="glitch" data-text="AI QUEST">AI QUEST</h1>
+                <p class="subtitle">인공지능의 세계로 로그인하시겠습니까?</p>
+                <button id="btn-start" class="cyber-btn">시스템 접속</button>
+            </div>
+            <div class="bg-particles"></div>
+        </section>
+
+        <!-- Level Select Screen -->
+        <section id="level-select-screen" class="screen">
+            <div class="glass-panel wide">
+                <h2>학습 모듈 선택</h2>
+                <div class="level-grid">
+                    <div class="level-card" data-level="1">
+                        <div class="card-icon">🧠</div>
+                        <h3>모듈 1</h3>
+                        <p>지도 학습 (Supervised Learning)</p>
+                    </div>
+                    <div class="level-card" data-level="2">
+                        <div class="card-icon">🕸️</div>
+                        <h3>모듈 2</h3>
+                        <p>신경망 (Neural Networks)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Container (Levels are injected here) -->
+        <section id="game-screen" class="screen">
+            <div class="top-bar">
+                <button id="btn-back-to-menu" class="cyber-btn small">◀ 뒤로가기</button>
+                <h2 id="current-level-title">Level Title</h2>
+                <div id="score-display">점수: <span id="score-value">0</span></div>
+            </div>
+            <div id="game-container" class="glass-panel game-area">
+                <!-- Level content will be injected via JS -->
+            </div>
+        </section>
+        
+        <!-- Modal for Level Complete / AI Explanations -->
+        <div id="info-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h3 id="modal-title">System Message</h3>
+                <p id="modal-text">정보가 여기에 표시됩니다.</p>
+                <button id="btn-modal-close" class="cyber-btn">확인</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

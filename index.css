@@ -1,0 +1,498 @@
+:root {
+    --bg-color: #050a15;
+    --text-primary: #e0f2fe;
+    --text-secondary: #94a3b8;
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ea;
+    --neon-green: #39ff14;
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(0, 243, 255, 0.3);
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Noto Sans KR', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 0, 234, 0.08), transparent 25%);
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: scale(0.95);
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.glass-panel.wide {
+    width: 80%;
+    max-width: 1000px;
+}
+
+.game-area {
+    width: 90%;
+    height: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Cyber Button */
+.cyber-btn {
+    background: transparent;
+    color: var(--neon-blue);
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border: 2px solid var(--neon-blue);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+    margin-top: 2rem;
+}
+
+.cyber-btn:hover {
+    background: var(--neon-blue);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--neon-blue), inset 0 0 20px rgba(255,255,255,0.5);
+    text-shadow: none;
+}
+
+.cyber-btn.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+/* Glitch Effect */
+.glitch {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    position: relative;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Level Select Grid */
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.level-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.level-card:hover {
+    border-color: var(--neon-pink);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(255, 0, 234, 0.2);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Top Bar */
+.top-bar {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#score-display {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--neon-green);
+    text-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    min-width: 400px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    color: var(--neon-pink);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Utils */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Level 1: Supervised Learning --- */
+.supervised-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.drop-zone {
+    flex: 1;
+    border: 2px dashed rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    transition: all 0.3s;
+    background: rgba(255,255,255,0.02);
+}
+
+.animal-zone {
+    border-color: var(--neon-blue);
+    background: rgba(0, 243, 255, 0.05);
+    box-shadow: inset 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.animal-zone.drag-over {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: inset 0 0 30px rgba(0, 243, 255, 0.3);
+}
+
+.fruit-zone {
+    border-color: var(--neon-pink);
+    background: rgba(255, 0, 234, 0.05);
+    box-shadow: inset 0 0 20px rgba(255, 0, 234, 0.1);
+}
+
+.fruit-zone.drag-over {
+    background: rgba(255, 0, 234, 0.2);
+    box-shadow: inset 0 0 30px rgba(255, 0, 234, 0.3);
+}
+
+.zone-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.zone-counter {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.animal-zone .zone-label, .animal-zone .zone-counter { color: var(--neon-blue); }
+.fruit-zone .zone-label, .fruit-zone .zone-counter { color: var(--neon-pink); }
+
+.sorted-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    min-height: 120px;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+.sorted-icon {
+    font-size: 1.5rem;
+    opacity: 0.8;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+#data-packet-container {
+    flex: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    position: relative;
+    padding: 1rem;
+}
+
+.data-packet {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.data-packet:active {
+    cursor: grabbing;
+}
+
+.data-packet.dragging {
+    opacity: 0.5;
+}
+
+.feedback {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    animation: floatUp 1s forwards;
+    pointer-events: none;
+    z-index: 20;
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.feedback span {
+    font-size: 1.1rem;
+    display: block;
+}
+
+.feedback.correct { color: var(--neon-green); }
+.feedback.wrong { color: red; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* --- Level 2: Neural Networks --- */
+.nn-board {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 2rem auto;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+#nn-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.nn-connection {
+    stroke: rgba(0, 243, 255, 0.3);
+    cursor: pointer;
+    transition: stroke 0.3s, stroke-width 0.3s;
+}
+
+.nn-connection:hover {
+    stroke: rgba(255, 0, 234, 0.8);
+}
+
+#nn-nodes-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.nn-node {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--bg-color);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50%;
+    transform: translate(-15px, -15px);
+    box-shadow: 0 0 10px var(--neon-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nn-node::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: var(--neon-blue);
+    border-radius: 50%;
+}
+
+/* --- Level 3: Reinforcement Learning --- */
+.maze-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
+    gap: 10px;
+    margin: 2rem auto;
+    position: relative;
+    width: max-content;
+}
+
+.grid-cell {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.grid-cell:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.grid-cell.reward {
+    border-color: var(--neon-green);
+    background: rgba(57, 255, 20, 0.1);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+}
+
+.grid-cell.obstacle {
+    border-color: var(--neon-pink);
+    background: rgba(255, 0, 234, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 234, 0.2);
+}
+
+.agent {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px var(--neon-blue));
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
