@@ -34,7 +34,33 @@
                         <h3>모듈 2</h3>
                         <p>신경망 (Neural Networks)</p>
                     </div>
+                    <div class="level-card" data-level="3">
+                        <div class="card-icon">🤖</div>
+                        <h3>모듈 3</h3>
+                        <p>강화 학습 (Reinforcement Learning)</p>
+                    </div>
                 </div>
+                <div class="community-entry" style="margin-top: 3rem;">
+                    <button id="btn-community" class="cyber-btn">💬 구독자 메세지 보드</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Screen -->
+        <section id="community-screen" class="screen">
+            <div class="glass-panel wide community-panel">
+                <div class="top-bar">
+                    <button id="btn-community-back" class="cyber-btn small">◀ 뒤로가기</button>
+                    <h2>Subscribers' Wall</h2>
+                </div>
+                <div id="message-board" class="message-board">
+                    <!-- Messages will be injected here -->
+                </div>
+                <form id="message-form" class="message-form">
+                    <input type="text" id="input-name" placeholder="닉네임" required maxlength="10">
+                    <textarea id="input-message" placeholder="응원 메세지를 남겨주세요!" required maxlength="100"></textarea>
+                    <button type="submit" class="cyber-btn small">전송</button>
+                </form>
             </div>
         </section>
 

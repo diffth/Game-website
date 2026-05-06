@@ -1,16 +1,20 @@
 import { initLevel1, cleanupLevel1 } from './components/Level1.js';
 import { initLevel2, cleanupLevel2 } from './components/Level2.js';
 import { initLevel3, cleanupLevel3 } from './components/Level3.js';
+import { initCommunity } from './components/Community.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Screens
     const startScreen = document.getElementById('start-screen');
     const levelSelectScreen = document.getElementById('level-select-screen');
     const gameScreen = document.getElementById('game-screen');
+    const communityScreen = document.getElementById('community-screen');
     
     // Buttons
     const btnStart = document.getElementById('btn-start');
     const btnBackToMenu = document.getElementById('btn-back-to-menu');
+    const btnCommunity = document.getElementById('btn-community');
+    const btnCommunityBack = document.getElementById('btn-community-back');
     const levelCards = document.querySelectorAll('.level-card');
     
     // Game Elements
@@ -42,6 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentLevel === 3) cleanupLevel3();
         gameContainer.innerHTML = '';
         currentLevel = null;
+        showScreen(levelSelectScreen);
+    });
+
+    btnCommunity.addEventListener('click', () => {
+        showScreen(communityScreen);
+        initCommunity();
+    });
+
+    btnCommunityBack.addEventListener('click', () => {
         showScreen(levelSelectScreen);
     });
 
